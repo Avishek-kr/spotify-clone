@@ -16,9 +16,8 @@ app.get('/', (req,res)=>{
     res.json(data)
 });
 
-app.get('/awesome',(req, res)=>{
-    const {name, isAwesome} = req.query;
-    res.send(`${name} is ${JSON.parse(isAwesome)? 'really': 'not really'} awesome`)
+app.get('/login',(req, res)=>{
+    res.send("log in to spotify");
 });
 
 app.listen(port, ()=>{
