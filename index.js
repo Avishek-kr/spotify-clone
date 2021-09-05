@@ -1,6 +1,6 @@
 require('dotenv').config()
 const express= require('express');
-const querystring=require('queryString');
+const querystring=require('querystring');
 const app=express();
 const port=8888;
 
@@ -17,11 +17,36 @@ app.get('/', (req,res)=>{
     res.json(data)
 });
 
+/**
+ * Generate a random string containing numbers and letters
+ * @param {number} length The length of the string
+ * @returns {string} The generated string 
+ */
+
+const generatedRandomString = length =>{
+    let text= '';
+    const possible= 
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    for(let i=0; i<length; i++){
+        text += possible.charAt(Math.floor(Math.random()* possible.length))
+    }
+    return text;
+}
+
+const stateKey= 'spotify_auth_state';
+
 app.get('/login',(req, res)=>{
+    const state= generatedRandomString(16);
+    res.cookie(stateKey, state);
+
+    const scope = 'user-read-private user-read-email';
+
     const queryParams= querystring.stringify({
-       cliend_id= CLIENT_ID,
-       response_type= 'code',
-       redirect_uri= REDIRECT_URI,
+       client_id: CLIENT_ID,
+       response_type: 'code',
+       redirect_uri: REDIRECT_URI,
+       state: state,
+       scope: scope
     })
     res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
