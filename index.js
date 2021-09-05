@@ -11,6 +11,10 @@ app.get('/', (req,res)=>{
     res.json(data)
 });
 
+app.get('/awesome',(req, res)=>{
+    const {name, isAwesome} = req.query;
+    res.send(`${name} is ${JSON.parse(isAwesome)? 'really': 'not really'} awesome`)
+});
 const port=8888;
 
 app.listen(port, ()=>{
