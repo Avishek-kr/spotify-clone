@@ -51,6 +51,10 @@ app.get('/login',(req, res)=>{
     res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
+app.get('/callback', (req,res)=>{
+    res.send('callback');
+})
+
 app.listen(port, ()=>{
     console.log(`Express app listening at http://localhost:${port}`);
 });
