@@ -23,8 +23,6 @@ app.get('/awesome-generator', (req, res) => {
   const { name, isAwesome } = req.query;
   res.send(`${name} is ${JSON.parse(isAwesome) ? 'really' : 'not'} awesome`);
 });
-
-
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
